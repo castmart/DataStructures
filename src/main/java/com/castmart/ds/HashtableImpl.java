@@ -24,7 +24,7 @@ public class HashtableImpl<K,V> implements Table<K, V> {
         TableRecord<K, V> currentElement = values[index];
         if (currentElement == null) {
             // Insert it.
-            values[index] = new TableRecord<K, V>(key, value);
+            values[index] = new TableRecord<>(key, value);
             count++;
         } else {
             System.out.println("Computed index ["+index+"] for " + key + ":" + value + " - tries to override element: " + currentElement.getK() + ":" + currentElement.getV() + " operation not allowed.");
@@ -36,7 +36,7 @@ public class HashtableImpl<K,V> implements Table<K, V> {
     }
 
     private void resize() {
-        System.out.printf("We need to resize storage porcentage: %1.2f\n", new Object[]{ ((float)count/values.length)});
+        //System.out.printf("We need to resize storage porcentage: %1.2f\n", new Object[]{ ((float)count/values.length)});
         TableRecord<K, V>[] doubleSizeArray = new TableRecord[values.length * 2];
         for (int i = 0; i < values.length; i++) {
             int index = values[i] != null ? (values[i].getK().hashCode() % doubleSizeArray.length) : -1;
