@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 public interface ResizableList<E> {
 
-
     public int size();
 
     public boolean isEmpty();

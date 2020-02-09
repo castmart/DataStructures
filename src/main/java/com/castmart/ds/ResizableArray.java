@@ -64,10 +64,11 @@ public class ResizableArray<E> implements ResizableList<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0) throw new IndexOutOfBoundsException("Index must be positive!!!");
-        if (index > count + 1) {
+        if (index < 0 || index > count ) throw new IndexOutOfBoundsException("Index must be positive and in the range of [0 - size]!!!");
+        if (index == count) {
             // Add at the end of the array.
             add(element);
+            return;
         }
         // Insert in between.
         // Insert then move all elements one slot ahead.

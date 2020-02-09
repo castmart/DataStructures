@@ -32,7 +32,7 @@ public class ResizableArrayTest {
     @Test
     public void whenInsertingElements_andHasToResize_then_AllStoredInTheSameOrder() {
         ResizableArray<Integer> resizableArray = new ResizableArray<>();    // Original size of 2.
-        int[] original = new int[] {1,2,3,4,5,6,7};                           // Ten elements will force resize twice.
+        int[] original = new int[] {1,2,3,4,5,6,7};                         // Ten elements will force resize twice.
         for (int i = 0; i < original.length; i++) {
             resizableArray.add(original[i]);
         }
@@ -49,6 +49,29 @@ public class ResizableArrayTest {
         constructArrayFromResizable(resizableArray, resultingArray);
         expected = new int[]{0,1,2,3,7,4,5,6,7};
         Assert.assertArrayEquals(expected, resultingArray);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenInsertingElementAtIndexLessThanZero_then_throwException() {
+        ResizableArray<Integer> resizableArray = new ResizableArray<>();    // Original size of 2.
+        int[] original = new int[] {1,2,3,4,5,6,7};                         // Ten elements will force resize twice.
+        for (int i = 0; i < original.length; i++) {
+            resizableArray.add(original[i]);
+        }
+        // Add element at index.
+        resizableArray.add(-1, 10);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenInsertingElementAtIndexBiggerThanCount_then_throwException() {
+        ResizableArray<Integer> resizableArray = new ResizableArray<>();    // Original size of 2.
+        int[] original = new int[] {1,2,3,4,5,6,7};                         // Ten elements will force resize twice.
+        for (int i = 0; i < original.length; i++) {
+            resizableArray.add(original[i]);
+        }
+        // Add element at index.
+        int index = resizableArray.size();
+        resizableArray.add(index + 1, 10);
     }
 
     private void constructArrayFromResizable(ResizableArray<Integer> resizableArray, int[] resultingArray) {
